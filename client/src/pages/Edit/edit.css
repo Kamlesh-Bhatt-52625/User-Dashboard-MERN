@@ -1,0 +1,7 @@
+.profile_div img {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1px solid #111;
+  object-fit: cover;
+}

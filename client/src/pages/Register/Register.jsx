@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./register.css";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -7,6 +6,9 @@ import Row from "react-bootstrap/Row";
 import Select from "react-select";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+// Register CSS
+import "./register.css";
 
 const Register = () => {
   const [inputData, setInputData] = useState({
@@ -61,6 +63,8 @@ const Register = () => {
     else if (!mobile) toast.error("Mobile is required");
     else if (mobile.length !== 10)
       toast.error("Enter a 10 digit Mobile number!");
+    else if (mobile.includes("-") || mobile.includes("+"))
+      toast.error("Do not include - or + in Mobile.");
     else if (gender === "") toast.error("Please select your gender.");
     else if (status === "") toast.error("Status is Required!");
     else if (image === "") toast.error("Profile Picture is Required!");
@@ -82,7 +86,7 @@ const Register = () => {
         <h2 className='text-center mt-1'>Register your details</h2>
         <Card className='shadow mt-3 p-3'>
           <div className='profile_div text-center'>
-            <img src={preview ? preview : "./man.png"} alt='img' />
+            <img src={preview ? preview : "/man.png"} alt='img' />
           </div>
 
           <Form>
@@ -160,7 +164,7 @@ const Register = () => {
                 <Form.Label>Select Your Status</Form.Label>
                 <Select
                   options={options}
-                  value={status}
+                  // value={status}
                   onChange={setStatusValue}
                 />
               </Form.Group>
