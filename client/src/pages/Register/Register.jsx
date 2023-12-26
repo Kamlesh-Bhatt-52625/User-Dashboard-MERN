@@ -5,6 +5,8 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Select from "react-select";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
   const [inputData, setInputData] = useState({
@@ -46,6 +48,28 @@ const Register = () => {
     setImage(e.target.files[0]);
   };
 
+  // submit user Data
+  const submitUserData = (e) => {
+    e.preventDefault();
+
+    const { fname, lname, email, mobile, gender, location } = inputData;
+    if (fname === "") {
+      toast.error("First name is required!");
+    } else if (lname === "") toast.error("Last name is required!");
+    else if (email === "") toast.error("Email is required!");
+    else if (!email.includes("@")) toast.error("Enter a valid email address.");
+    else if (!mobile) toast.error("Mobile is required");
+    else if (mobile.length !== 10)
+      toast.error("Enter a 10 digit Mobile number!");
+    else if (gender === "") toast.error("Please select your gender.");
+    else if (status === "") toast.error("Status is Required!");
+    else if (image === "") toast.error("Profile Picture is Required!");
+    else if (location === "") toast.error("Please enter your location.");
+    else {
+      toast.success("Registration Successfull!");
+    }
+  };
+
   useEffect(() => {
     if (image) {
       setPreview(URL.createObjectURL(image));
@@ -69,6 +93,7 @@ const Register = () => {
                   type='text'
                   name='fname'
                   placeholder='Enter First Name'
+                  value={inputData.fname}
                   onChange={setInputValue}
                 />
               </Form.Group>
@@ -79,6 +104,7 @@ const Register = () => {
                   type='text'
                   name='lname'
                   placeholder='Enter Last Name'
+                  value={inputData.lname}
                   onChange={setInputValue}
                 />
               </Form.Group>
@@ -89,6 +115,7 @@ const Register = () => {
                   type='email'
                   name='email'
                   placeholder='Enter Email'
+                  value={inputData.email}
                   onChange={setInputValue}
                 />
               </Form.Group>
@@ -99,6 +126,7 @@ const Register = () => {
                   type='number'
                   name='mobile'
                   placeholder='Enter Mobile'
+                  value={inputData.mobile}
                   onChange={setInputValue}
                 />
               </Form.Group>
@@ -130,7 +158,11 @@ const Register = () => {
 
               <Form.Group className='mb-3 col-lg-6' controlId='formBasicEmail'>
                 <Form.Label>Select Your Status</Form.Label>
-                <Select options={options} onChange={setStatusValue} />
+                <Select
+                  options={options}
+                  value={status}
+                  onChange={setStatusValue}
+                />
               </Form.Group>
 
               <Form.Group className='mb-3 col-lg-6' controlId='formBasicEmail'>
@@ -149,15 +181,17 @@ const Register = () => {
                   type='text'
                   name='location'
                   placeholder='Enter Your Location'
+                  value={inputData.location}
                   onChange={setInputValue}
                 />
               </Form.Group>
-              <Button variant='primary' type='submit'>
+              <Button variant='primary' type='submit' onClick={submitUserData}>
                 Submit
               </Button>
             </Row>
           </Form>
         </Card>
+        <ToastContainer position='top-center' />
       </div>
     </>
   );
