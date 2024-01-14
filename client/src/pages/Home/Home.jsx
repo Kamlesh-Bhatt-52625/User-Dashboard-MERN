@@ -1,6 +1,7 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Dropdown from "react-bootstrap/Dropdown";
 
 // Home CSS
 import "./home.css";
@@ -66,6 +67,52 @@ const Home = () => {
                     label={"Others"}
                     name='gender'
                     value={"Others"}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Sort by Value */}
+            <div className='filter_newold'>
+              <h3>Sort By Value</h3>
+              <Dropdown className='text-center'>
+                <Dropdown.Toggle
+                  className='dropdown_btn'
+                  variant='success'
+                  id='dropdown-basic'>
+                  <i class='fa-solid fa-sort'></i>
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  <Dropdown.Item>New</Dropdown.Item>
+                  <Dropdown.Item>Old</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </div>
+
+            {/* Filter by Status */}
+            <div className='filter_status'>
+              <div className='status'>
+                <h3>Filter by Status</h3>
+                <div className='status_radiol d-flex justify-content-around flex-wrap'>
+                  <Form.Check
+                    type={"radio"}
+                    label={"All"}
+                    name='status'
+                    value={"All"}
+                    defaultChecked
+                  />
+                  <Form.Check
+                    type={"radio"}
+                    label={"Active"}
+                    name='status'
+                    value={"Active"}
+                  />
+                  <Form.Check
+                    type={"radio"}
+                    label={"InActive"}
+                    name='status'
+                    value={"InActive"}
                   />
                 </div>
               </div>
