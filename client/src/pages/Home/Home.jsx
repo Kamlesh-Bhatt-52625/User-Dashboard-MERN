@@ -1,12 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
+import Tables from "../../components/Tables/Tables";
+import { useNavigate } from "react-router-dom";
 
 // Home CSS
 import "./home.css";
+import Spiner from "../../components/Spiner/Spiner";
 
 const Home = () => {
+  const [showSpin, setShowSpin] = useState(true);
+
+  // For Navigation
+  const navigate = useNavigate();
+
+  const addUser = () => {
+    navigate("/register");
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShowSpin(false);
+    }, 1200);
+  }, []);
+
   return (
     <>
       <div className='container'>
@@ -28,7 +46,7 @@ const Home = () => {
             </div>
 
             <div className='add_btn'>
-              <Button variant='primary' className=''>
+              <Button variant='primary' className='' onClick={addUser}>
                 <i class='fa-solid fa-plus'></i>&nbsp; Add User
               </Button>
             </div>
@@ -119,6 +137,7 @@ const Home = () => {
             </div>
           </div>
         </div>
+        {showSpin ? <Spiner /> : <Tables />}
       </div>
     </>
   );
